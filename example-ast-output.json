@@ -1,0 +1,180 @@
+[
+  {
+    "type": "use",
+    "database": "DATABASE1"
+  },
+  {
+    "type": "select",
+    "list": [
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "column",
+            "column": "ID"
+          }
+        ]
+      },
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "column",
+            "column": "NAME"
+          }
+        ]
+      },
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "column",
+            "column": "ADDRESS"
+          }
+        ]
+      }
+    ],
+    "table_expr": {
+      "type": "table_expr",
+      "from": {
+        "type": "from_clause",
+        "list": [
+          {
+            "type": "table_ref",
+            "table": "USERS"
+          }
+        ]
+      },
+      "where": {
+        "type": "where_clause",
+        "expr": {
+          "type": "expr",
+          "stack": [
+            {
+              "type": "column",
+              "column": "IS_CUSTOMER"
+            },
+            {
+              "type": "not",
+              "value": {
+                "type": "null"
+              }
+            },
+            {
+              "type": "operator",
+              "operator": "IS"
+            }
+          ]
+        }
+      },
+      "order_by": {
+        "type": "order_by",
+        "expr": [
+          {
+            "type": "column",
+            "column": "CREATED"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "insert",
+    "into": {
+      "type": "table_ref",
+      "table": "USER_NOTES"
+    },
+    "columns": [
+      {
+        "type": "column",
+        "column": "ID"
+      },
+      {
+        "type": "column",
+        "column": "USER_ID"
+      },
+      {
+        "type": "column",
+        "column": "NOTE"
+      },
+      {
+        "type": "column",
+        "column": "CREATED"
+      }
+    ],
+    "values": [
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "number",
+            "number": 1
+          }
+        ]
+      },
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "number",
+            "number": 1
+          }
+        ]
+      },
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "column",
+            "column": "Note 1"
+          }
+        ]
+      },
+      {
+        "type": "expr",
+        "stack": [
+          {
+            "type": "call",
+            "func_name": "NOW"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "delete",
+    "table_expr": {
+      "type": "table_expr",
+      "from": {
+        "type": "from_clause",
+        "list": [
+          {
+            "type": "table_ref",
+            "db": "DATABASE2",
+            "table": "LOGS"
+          }
+        ]
+      },
+      "where": {
+        "type": "where_clause",
+        "expr": {
+          "type": "expr",
+          "stack": [
+            {
+              "type": "column",
+              "column": "ID"
+            },
+            {
+              "type": "number",
+              "number": 1000
+            },
+            {
+              "type": "operator",
+              "operator": "<"
+            }
+          ]
+        }
+      }
+    }
+  }
+]
